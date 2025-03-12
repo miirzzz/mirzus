@@ -668,112 +668,100 @@
             line-height: 1.2;
         }
 
-        /* Обновленные медиа-запросы для мобильных устройств */
+        /* Обновленные стили для мобильного портфолио */
         @media screen and (max-width: 768px) {
-            .container {
-                padding: 10px;
-            }
-
-            .profile-card {
-                width: 100%;
-                max-width: 350px;
-                padding: 20px;
-            }
-
-            /* Исправление смещения при показе портфолио */
+            /* Изменяем отображение портфолио */
             .show-portfolio .cards-wrapper {
-                transform: translateX(-30%); /* Уменьшаем смещение */
+                transform: translateX(0); /* Убираем смещение */
+            }
+
+            .show-portfolio .profile-card {
+                display: none; /* Скрываем основную карточку */
             }
 
             .portfolio-card {
-                width: 90%; /* Уменьшаем ширину карточки портфолио */
+                position: fixed;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                padding: 20px;
+                overflow-y: auto;
+                background: #000000;
             }
 
-            /* Адаптация портфолио */
+            /* Стилизуем секции портфолио */
             .portfolio-row {
                 flex-direction: column;
                 gap: 30px;
             }
 
             .portfolio-section {
-                width: 100%;
-                min-width: unset;
+                background: rgba(255, 255, 255, 0.03);
+                border-radius: 12px;
+                padding: 20px;
+                margin-bottom: 20px;
             }
 
-            /* Убираем вертикальные разделители */
-            .portfolio-row .portfolio-section:not(:last-child)::after {
+            .section-title {
+                font-size: 18px !important;
+                margin-bottom: 15px;
+                color: rgba(255, 255, 255, 0.9) !important;
+            }
+
+            .redux-link {
+                font-size: 14px;
+                padding: 10px 0;
+                display: block;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            }
+
+            .redux-link:last-child {
+                border-bottom: none;
+            }
+
+            /* Стилизуем кнопку возврата */
+            .back-button {
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: rgba(255, 255, 255, 0.1);
+                backdrop-filter: blur(10px);
+                border: none;
+                color: white;
+                padding: 8px 16px;
+                border-radius: 20px;
+                cursor: pointer;
+                z-index: 1000;
+                font-size: 14px;
                 display: none;
             }
 
-            /* Добавляем кнопку закрытия портфолио */
-            .close-portfolio {
+            .show-portfolio .back-button {
                 display: block;
-                position: absolute;
-                top: 10px;
-                right: 10px;
-                background: rgba(255, 255, 255, 0.1);
-                border: none;
-                color: white;
-                padding: 8px;
-                border-radius: 50%;
-                cursor: pointer;
             }
         }
 
         /* Дополнительные стили для очень маленьких экранов */
         @media screen and (max-width: 480px) {
-            .profile-card {
+            .portfolio-section {
                 padding: 15px;
             }
 
-            .show-portfolio .cards-wrapper {
-                transform: translateX(-20%); /* Еще меньше смещение */
-            }
-
-            .portfolio-card {
-                width: 85%;
-            }
-
             .section-title {
-                font-size: 14px !important;
+                font-size: 16px !important;
             }
 
             .redux-link {
-                font-size: 12px;
+                font-size: 13px;
+                padding: 8px 0;
             }
 
-            .tags {
-                flex-wrap: wrap;
-            }
-
-            .tag {
-                font-size: 12px;
-                padding: 6px 10px;
-            }
-        }
-
-        /* Добавляем кнопку возврата для мобильных устройств */
-        .back-button {
-            display: none;
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: rgba(255, 255, 255, 0.1);
-            border: none;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 20px;
-            cursor: pointer;
-            z-index: 1000;
-        }
-
-        @media screen and (max-width: 768px) {
             .back-button {
-                display: block;
-            }
-
-            .show-portfolio .back-button {
-                display: block;
+                top: 15px;
+                right: 15px;
+                padding: 6px 12px;
+                font-size: 13px;
             }
         }
 
