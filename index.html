@@ -784,8 +784,6 @@
         }
     </style>
     <script src="stars.js" defer></script>
-    <script src="https://www.gstatic.com/firebasejs/9.1.3/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.1.3/firebase-database.js"></script>
 </head>
 <body>
     <div class="stars"></div>
@@ -1048,35 +1046,6 @@
         // Используйте при установке source для audio
         const audioSource = document.querySelector('#backgroundMusic source');
         audioSource.src = sanitizeUrl(audioSource.src);
-
-        // Firebase configuration
-        const firebaseConfig = {
-            apiKey: "AIzaSyBgtA6fTiDYL77mdYCySq6ZbM1kQG7ArRs",
-            authDomain: "mirz-733ec.firebaseapp.com",
-            databaseURL: "https://mirz-733ec.firebaseio.com",
-            projectId: "mirz-733ec",
-            storageBucket: "mirz-733ec.appspot.com",
-            messagingSenderId: "290159181952",
-            appId: "1:290159181952:web:ad572fea92e99deb422665",
-            measurementId: "G-5NSZRS7GFX"
-        };
-
-        // Initialize Firebase
-        const app = firebase.initializeApp(firebaseConfig);
-        const database = firebase.database();
-
-        // Update view count
-        async function updateViewCount() {
-            const viewCountRef = database.ref('viewCount');
-            viewCountRef.transaction(currentViews => {
-                return (currentViews || 0) + 1;
-            });
-            viewCountRef.on('value', snapshot => {
-                document.getElementById('viewCount').textContent = snapshot.val();
-            });
-        }
-
-        document.addEventListener('DOMContentLoaded', updateViewCount);
     </script>
 </body>
 </html>
