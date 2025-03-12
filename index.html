@@ -8,6 +8,13 @@
     <meta name="referrer" content="strict-origin-when-cross-origin">
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta http-equiv="X-Frame-Options" content="DENY">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZVJPNTKK9N"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-ZVJPNTKK9N');
+    </script>
     <style>
         /* Импорт шрифта Inter */
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
@@ -661,79 +668,112 @@
             line-height: 1.2;
         }
 
-        /* Базовые медиа-запросы для адаптивности */
+        /* Обновленные медиа-запросы для мобильных устройств */
         @media screen and (max-width: 768px) {
             .container {
-                padding: 20px 10px;
+                padding: 10px;
             }
 
             .profile-card {
                 width: 100%;
                 max-width: 350px;
+                padding: 20px;
             }
 
-            .avatar {
-                width: 80px;
-                height: 80px;
+            /* Исправление смещения при показе портфолио */
+            .show-portfolio .cards-wrapper {
+                transform: translateX(-30%); /* Уменьшаем смещение */
             }
 
-            .username {
-                font-size: 20px;
+            .portfolio-card {
+                width: 90%; /* Уменьшаем ширину карточки портфолио */
             }
 
-            .achievement-text {
-                font-size: 12px;
-            }
-        }
-
-        /* Специальные стили для очень маленьких экранов */
-        @media screen and (max-width: 480px) {
+            /* Адаптация портфолио */
             .portfolio-row {
                 flex-direction: column;
-                gap: 40px;
+                gap: 30px;
             }
 
             .portfolio-section {
-                min-width: unset;
                 width: 100%;
+                min-width: unset;
             }
 
-            /* Убираем вертикальные разделители на мобильных */
+            /* Убираем вертикальные разделители */
             .portfolio-row .portfolio-section:not(:last-child)::after {
                 display: none;
             }
 
-            /* Горизонтальные разделители для мобильных */
-            .portfolio-row .portfolio-section:not(:last-child) {
-                border-bottom: 1px solid rgba(255, 255, 255, 0.07);
-                padding-bottom: 20px;
+            /* Добавляем кнопку закрытия портфолио */
+            .close-portfolio {
+                display: block;
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                background: rgba(255, 255, 255, 0.1);
+                border: none;
+                color: white;
+                padding: 8px;
+                border-radius: 50%;
+                cursor: pointer;
+            }
+        }
+
+        /* Дополнительные стили для очень маленьких экранов */
+        @media screen and (max-width: 480px) {
+            .profile-card {
+                padding: 15px;
             }
 
             .show-portfolio .cards-wrapper {
-                transform: translateX(-100%);
+                transform: translateX(-20%); /* Еще меньше смещение */
             }
 
-            .social-links {
-                gap: 15px;
+            .portfolio-card {
+                width: 85%;
             }
 
-            .social-icon {
-                width: 20px;
-                height: 20px;
+            .section-title {
+                font-size: 14px !important;
             }
 
-            .location {
-                font-size: 13px;
+            .redux-link {
+                font-size: 12px;
             }
 
             .tags {
                 flex-wrap: wrap;
-                justify-content: center;
             }
 
             .tag {
                 font-size: 12px;
-                padding: 8px 16px;
+                padding: 6px 10px;
+            }
+        }
+
+        /* Добавляем кнопку возврата для мобильных устройств */
+        .back-button {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            z-index: 1000;
+        }
+
+        @media screen and (max-width: 768px) {
+            .back-button {
+                display: block;
+            }
+
+            .show-portfolio .back-button {
+                display: block;
             }
         }
 
@@ -784,6 +824,8 @@
         }
     </style>
     <script src="stars.js" defer></script>
+    <script src="https://www.gstatic.com/firebasejs/9.1.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.1.3/firebase-database.js"></script>
 </head>
 <body>
     <div class="stars"></div>
@@ -826,12 +868,6 @@
                                 <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.161c-.18 1.897-.962 6.502-1.359 8.627-.168.9-.5 1.201-.82 1.23-.697.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.015-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.062 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.244-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.831-2.529 6.998-3.014 3.333-1.386 4.025-1.627 4.477-1.635.099-.002.321.023.465.14.12.097.153.227.171.326.017.093.036.306.02.472z"/>
                             </svg>
                         </a>
-                    </div>
-                    <div class="view-counter">
-                        <svg class="eye-icon" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
-                        </svg>
-                        <span id="viewCount">0</span> views
                     </div>
                 </div>
             </div>
@@ -936,22 +972,6 @@
             });
         });
 
-        // Функция для обновления счетчика просмотров
-        async function updateViewCount() {
-            try {
-                // Здесь должен быть запрос к вашему бэкенду для обновления счетчика
-                // Пример с использованием localStorage для демонстрации
-                let views = parseInt(localStorage.getItem('pageViews') || '0');
-                views++;
-                localStorage.setItem('pageViews', views.toString());
-                document.getElementById('viewCount').textContent = views;
-            } catch (error) {
-                console.error('Error updating view count:', error);
-            }
-        }
-
-        // Вызываем функцию при загрузке страницы
-        document.addEventListener('DOMContentLoaded', updateViewCount);
 
         document.addEventListener('DOMContentLoaded', function() {
             const audio = document.getElementById('backgroundMusic');
@@ -1046,6 +1066,43 @@
         // Используйте при установке source для audio
         const audioSource = document.querySelector('#backgroundMusic source');
         audioSource.src = sanitizeUrl(audioSource.src);
+
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyBueMlRULWX-47sEXt2J7wib6DoLVkYeR4",
+            authDomain: "mirz-c98c2.firebaseapp.com",
+            databaseURL: "https://mirz-c98c2-default-rtdb.firebaseio.com/",
+            projectId: "mirz-c98c2",
+            storageBucket: "mirz-c98c2.firebasestorage.app",
+            messagingSenderId: "902406550327",
+            appId: "1:902406550327:web:773d6f56ef798d9d1aa0b2",
+            measurementId: "G-ZVJPNTKK9N"
+        };
+
+        // Initialize Firebase
+        const app = firebase.initializeApp(firebaseConfig);
+        const database = firebase.database();
+
+        function addBackButton() {
+            const backButton = document.createElement('button');
+            backButton.className = 'back-button';
+            backButton.textContent = 'Back';
+            backButton.style.display = 'none';
+            
+            backButton.addEventListener('click', () => {
+                document.querySelector('.container').classList.remove('show-portfolio');
+                backButton.style.display = 'none';
+            });
+
+            document.body.appendChild(backButton);
+
+            // Показываем кнопку при открытии портфолио
+            document.querySelector('.tag').addEventListener('click', () => {
+                backButton.style.display = 'block';
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', addBackButton);
     </script>
 </body>
 </html>
