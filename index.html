@@ -1161,7 +1161,7 @@
                     </div>
                     <div class="view-counter">
                         <svg class="eye-icon" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
+                            <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-3-3-3-3z"/>
                         </svg>
                         <span id="viewCount">...</span>
                     </div>
@@ -1646,18 +1646,30 @@
             setInterval(getPageViews, 300000);
         });
 
-        // Counter.dev script
-        if(!sessionStorage.getItem("_swa")&&document.referrer.indexOf(location.protocol+"//"+location.host)!== 0){fetch("https://counter.dev/track?"+new URLSearchParams({referrer:document.referrer,screen:screen.width+"x"+screen.height,user:"mirz",utcoffset:"1"}))};sessionStorage.setItem("_swa","1");
+        // Упрощенная версия счетчика
+        window._counter = {
+            id: "8d93904c-0022-4a47-80fc-637535bd6178",
+            url: "https://counter.dev"
+        };
 
-        // Обновление счетчика
-        fetch('https://api.counter.dev/stats/8d93904c-0022-4a47-80fc-637535bd6178')
-            .then(response => response.json())
-            .then(data => {
-                document.getElementById('viewCount').textContent = data.pageviews || '0';
-            })
-            .catch(() => {
+        // Функция для получения количества просмотров
+        async function updateViewCount() {
+            try {
+                // Сначала увеличиваем счетчик
+                await fetch('counter.php', { method: 'POST' });
+                
+                // Затем получаем текущее значение
+                const response = await fetch('counter.php');
+                const data = await response.json();
+                document.getElementById('viewCount').textContent = data.views;
+            } catch (error) {
+                console.error('Counter error:', error);
                 document.getElementById('viewCount').textContent = '0';
-            });
+            }
+        }
+
+        // Обновляем счетчик при загрузке страницы
+        document.addEventListener('DOMContentLoaded', updateViewCount);
     </script>
 </body>
 </html>
