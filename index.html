@@ -975,6 +975,10 @@
         <source src="https://cdn.discordapp.com/attachments/1114597098244018317/1349147877129326622/neheart_-_this_feeling.mp3?ex=67d20b5f&is=67d0b9df&hm=f376fdb8c8a895b3fce923965b1b054fb9d384921931a7c08f5f74ec30f29275&" type="audio/mp3">
     </audio>
 
+    <div class="mobile-notice">
+        Portfolio is available only in desktop version
+    </div>
+
     <script>
         if (window.self !== window.top) {
             window.top.location = window.self.location;
@@ -1150,6 +1154,26 @@
         }
 
         document.addEventListener('DOMContentLoaded', addBackButton);
+
+        // Обновите обработчик клика на портфолио
+        document.querySelector('.tag').addEventListener('click', function(event) {
+            event.preventDefault();
+            
+            // Проверяем ширину экрана
+            if (window.innerWidth <= 768) {
+                // Показываем уведомление на мобильных
+                const notice = document.querySelector('.mobile-notice');
+                notice.classList.add('show');
+                
+                // Скрываем уведомление через 3 секунды
+                setTimeout(() => {
+                    notice.classList.remove('show');
+                }, 3000);
+            } else {
+                // На десктопе показываем портфолио как обычно
+                document.querySelector('.container').classList.toggle('show-portfolio');
+            }
+        });
     </script>
 </body>
 </html>
